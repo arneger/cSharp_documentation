@@ -14,8 +14,8 @@ atleast 25 years old and lived in the city for atleast 5 years.
 */
     class City_System
     {
-        public int the_age;
-        public int the_time;
+        private int the_age;
+        private int the_time;
         public City_System(string a, string t)
         {
             the_age = Convert.ToInt32(a);
