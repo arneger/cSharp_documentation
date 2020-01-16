@@ -10,29 +10,29 @@ namespace program1
     {   // Returns area
         static double Areal(string radius)
         {
-            float the_radius = Convert.ToSingle(radius);
-            double the_area = Math.PI * the_radius * the_radius;
-            return the_area;
+            float theRadius = Convert.ToSingle(radius);
+            double theArea = Math.PI * theRadius * theRadius;
+            return theArea;
         }
         // Returns the length of a sentence
         static int Sentence_Counter(string sentence)
         {
             string[] words = sentence.Split(' ');
-            string all_words = "";
+            string allWords = "";
             foreach (string element in words)
             {
-                all_words += element;
+                allWords += element;
             }
-            int all_words_length = all_words.Length;
-            return all_words_length;
-                
+            int allWordsLength = allWords.Length;
+            return allWordsLength;
+
         }
         // Returns a number from 1 to 6 (It's a dice)
         static int RollDice()
         {
             Random number = new Random();
-            int random_number = number.Next(1, 7);
-            return random_number;
+            int randomNumber = number.Next(1, 7);
+            return randomNumber;
         }
         // Main method to test the methods.
         static void Main(string[] args)
@@ -46,7 +46,7 @@ namespace program1
             int dice = RollDice();
             Console.WriteLine("The dice rolled: {0}", dice);
         }
-        
-        
+
+
     }
 }
