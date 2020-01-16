@@ -14,16 +14,16 @@ atleast 25 years old and lived in the city for atleast 5 years.
 */
     class City_System
     {
-        private int the_age;
-        private int the_time;
+        private int theAge;
+        private int theTime;
         public City_System(string a, string t)
         {
-            the_age = Convert.ToInt32(a);
-            the_time = Convert.ToInt32(t);
+            theAge = Convert.ToInt32(a);
+            theTime = Convert.ToInt32(t);
         }
         public int Age_Value()
         {
-            int age = the_age;
+            int age = theAge;
             if (age >= 25 && age < 30)
                 return 1;
             else if (age < 25)
@@ -35,8 +35,8 @@ atleast 25 years old and lived in the city for atleast 5 years.
         }
         public int Citizen_Time()
         {
-            int time = the_time;
-            if (time >= 5 && the_time < 10)
+            int time = theTime;
+            if (time >= 5 && theTime < 10)
                 return 1;
             else if (time < 5)
                 return 2;
@@ -47,26 +47,26 @@ atleast 25 years old and lived in the city for atleast 5 years.
         }
         public void Aprrove_System()
         {
-            int value_age = Age_Value();
-            int value_time = Citizen_Time();
-            if (value_age == 1 && value_time == 1)
-                Console.WriteLine("You can sit in the council.\nWhen you've lived here " + (9 - the_time) + " more years and lived " + (30 - the_age) + " more years to run for Mayor");
-            else if (value_age == 2 && value_time == 2)
-                Console.WriteLine("You're not qualified. You need to live here " + (5 - the_time) + " more years and live " + (25 - the_age) + " more years to become a part of the council");
-            else if (value_age == 3 && value_time == 3)
+            int valueAge = Age_Value();
+            int valueTime = Citizen_Time();
+            if (valueAge == 1 && valueTime == 1)
+                Console.WriteLine("You can sit in the council.\nWhen you've lived here " + (9 - theTime) + " more years and lived " + (30 - theAge) + " more years to run for Mayor");
+            else if (valueAge == 2 && valueTime == 2)
+                Console.WriteLine("You're not qualified. You need to live here " + (5 - theTime) + " more years and live " + (25 - theAge) + " more years to become a part of the council");
+            else if (valueAge == 3 && valueTime == 3)
                 Console.WriteLine("You can run for Mayor and sit on the council");
-            else if (value_age == 1 && value_time == 2)
-                Console.WriteLine("You're not qualified. You need to live here " + (5 - the_time) + " more years to become a part of the council");
-            else if (value_age == 1 && value_time == 3)
-                Console.WriteLine("You can join the council.\nWait " + (30 - the_age) + " more years to run for Mayor");
-            else if (value_age == 2 && value_time == 1)
-                Console.WriteLine("You're not qualified. Wait " + (25 - the_age) + " to become a part of the council");
-            else if (value_age == 2 && value_time == 3)
-                Console.WriteLine("You're not qualified. Wait " + (25 - the_age) + " more years to become a part of the council or run for Mayor");
-            else if (value_age == 3 && value_time == 1)
-                Console.WriteLine("You can join the council. Apply in " + (9 - the_time) + " more years to run for Mayor");
-            else if (value_age == 3 && value_time == 2)
-                Console.WriteLine("You're not qualified. Wait " + (5 - the_time) + " more years to become a part of the council");
+            else if (valueAge == 1 && valueTime == 2)
+                Console.WriteLine("You're not qualified. You need to live here " + (5 - theTime) + " more years to become a part of the council");
+            else if (valueAge == 1 && valueTime == 3)
+                Console.WriteLine("You can join the council.\nWait " + (30 - theAge) + " more years to run for Mayor");
+            else if (valueAge == 2 && valueTime == 1)
+                Console.WriteLine("You're not qualified. Wait " + (25 - theAge) + " to become a part of the council");
+            else if (valueAge == 2 && valueTime == 3)
+                Console.WriteLine("You're not qualified. Wait " + (25 - theAge) + " more years to become a part of the council or run for Mayor");
+            else if (valueAge == 3 && valueTime == 1)
+                Console.WriteLine("You can join the council. Apply in " + (9 - theTime) + " more years to run for Mayor");
+            else if (valueAge == 3 && valueTime == 2)
+                Console.WriteLine("You're not qualified. Wait " + (5 - theTime) + " more years to become a part of the council");
         }
     }
     class Program
@@ -76,10 +76,9 @@ atleast 25 years old and lived in the city for atleast 5 years.
             Console.Write("Your age: ");
             string age = Console.ReadLine();
             Console.Write("Your time as a citizen: ");
-            string citizen_time = Console.ReadLine();
-            City_System person = new City_System(age, citizen_time);
+            string citizenTime = Console.ReadLine();
+            City_System person = new City_System(age, citizenTime);
             person.Aprrove_System();
         }
     }
 }
-
