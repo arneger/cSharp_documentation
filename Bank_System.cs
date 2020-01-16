@@ -13,48 +13,48 @@ namespace ConsoleApp6
     {
         private double balance;
         public string name;
-        private double interest_rate;
+        private double interestRate;
         public Bank(string n, double s = 0, double r = 0.01)
         {
             name = n;
             balance = s;
-            interest_rate = r;
+            interestRate = r;
         }
         // Method for depositing money into the bank account
         public void Deposit(double money)
         {
-            double temp_balance = balance;
+            double tempBalance = balance;
             balance += money;
-            if (temp_balance < 1000000 && balance > 1000000)
+            if (tempBalance < 1000000 && balance > 1000000)
                 Console.WriteLine("Your interest rate increased by 1 percent");
             Balance_Exceed();
         }
         // Method to withdraw money from the bank account
         public void Withdrawal(double money)
         {
-            double temp_balance;
+            double tempBalance;
             if (balance < money)
                 Console.WriteLine("Money overdraft");
             else
             {
-                temp_balance = balance;
+                tempBalance = balance;
                 balance -= money;
-                if (temp_balance > 1000000 && balance < 1000000)
+                if (tempBalance > 1000000 && balance < 1000000)
                     Console.WriteLine("Your interest rate decreased by 1 percent");
                 Balance_Exceed();
             }
         }
         // Method that calculates the interest rate on the balance and returns the rate value.
-        public double Interest_Calculation()
+        public double interesCalculation()
         {
-            return balance * interest_rate;
+            return balance * interestRate;
         }
         // Method that adds the interest rate money value to the balance
         public void Interest_Settlement()
         {
-            double temp_balance = balance;
-            balance += Interest_Calculation();
-            if (temp_balance < 1000000 && balance > 1000000)
+            double tempBalance = balance;
+            balance += interesCalculation();
+            if (tempBalance < 1000000 && balance > 1000000)
                 Console.WriteLine("Your interest rate increased by 1 percent");
             Balance_Exceed();
         }
@@ -62,9 +62,9 @@ namespace ConsoleApp6
         public void Balance_Exceed()
         {
             if (balance > 1000000)
-                interest_rate = 0.02;
+                interestRate = 0.02;
             else
-                interest_rate = 0.01;
+                interestRate = 0.01;
         }
         // Method that prints the menu
         public void Show_Menu()
@@ -75,7 +75,7 @@ namespace ConsoleApp6
         public void Start_Menu()
         {
             Show_Menu();
-            ArrayList last_3_changes = new ArrayList(10); 
+            ArrayList lastChanges = new ArrayList(10);
             while (true)
             {
                 string action = Console.ReadLine();
@@ -85,9 +85,9 @@ namespace ConsoleApp6
                 {
                     Console.Write("Amount: ");
                     double amount = Convert.ToDouble(Console.ReadLine());
-                    last_3_changes.Add("+" + Convert.ToString(amount));
-                    if (last_3_changes.Count == 4)
-                        last_3_changes.RemoveAt(0);
+                    lastChanges.Add("+" + Convert.ToString(amount));
+                    if (lastChanges.Count == 4)
+                        lastChanges.RemoveAt(0);
                     Deposit(amount);
                     Console.WriteLine("New balance: {0}", balance);
                 }
@@ -95,23 +95,23 @@ namespace ConsoleApp6
                 {
                     Console.Write("Amount: ");
                     double amount = Convert.ToDouble(Console.ReadLine());
-                    last_3_changes.Add("-" + Convert.ToString(amount));
-                    if (last_3_changes.Count == 4) 
-                        last_3_changes.RemoveAt(0);
+                    lastChanges.Add("-" + Convert.ToString(amount));
+                    if (lastChanges.Count == 4)
+                        lastChanges.RemoveAt(0);
                     Withdrawal(amount);
                     Console.WriteLine("New balance: {0}", balance);
                 }
                 else if (action == "4")
                 {
-                    last_3_changes.Add("+" + Convert.ToString(balance * interest_rate));
-                    if (last_3_changes.Count == 4) 
-                        last_3_changes.RemoveAt(0);
+                    lastChanges.Add("+" + Convert.ToString(balance * interestRate));
+                    if (lastChanges.Count == 4)
+                        lastChanges.RemoveAt(0);
                     Interest_Settlement();
                     Console.WriteLine("New balance: {0}", balance);
                 }
                 else if (action == "5")
                 {
-                    foreach (string change in last_3_changes)
+                    foreach (string change in lastChanges)
                     {
                         Console.WriteLine(change);
                     }
@@ -125,7 +125,7 @@ namespace ConsoleApp6
                     Show_Menu();
                 else
                     continue;
-                
+
 
             }
         }
