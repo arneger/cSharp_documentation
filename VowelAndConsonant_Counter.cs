@@ -9,17 +9,17 @@ namespace ConsoleApp6
     //Class that includes methods to count vowels and consonants in a string
     class String_Manipulator
     {
-        private string setning;
+        private string theSentence;
         public String_Manipulator(string s)
         {
-            setning = s;
+            theSentence = s;
         }
         //Counts vowels in a string
         public int Vowels_Amount()
         {
             string vowels = "aeioy";
             int amount = 0;
-            foreach (char element in setning.ToLower())
+            foreach (char element in theSentence.ToLower())
             {
                 if (vowels.Contains(element))
                     amount += 1;
@@ -31,7 +31,7 @@ namespace ConsoleApp6
         {
             string vowels = "aeio y";
             int amount = 0;
-            foreach (char element in setning.ToLower())
+            foreach (char element in theSentence.ToLower())
             {
                 if (!vowels.Contains(element))
                     amount += 1;
@@ -39,7 +39,7 @@ namespace ConsoleApp6
             return amount;
         }
     }
-    
+
     class Program
     {
         static void Main(string[] args)
@@ -50,10 +50,10 @@ namespace ConsoleApp6
             string decide = Console.ReadLine();
             String_Manipulator x = new String_Manipulator(sentence);
             if (decide.ToLower() == "v")
-                Console.WriteLine("Vowels: {0}",x.Vowels_Amount());
-            else if (decide.ToLower()=="c")
-                Console.WriteLine("Consonants: {0}",x.Consonant_Amount());
-            
+                Console.WriteLine("Vowels: {0}", x.Vowels_Amount());
+            else if (decide.ToLower() == "c")
+                Console.WriteLine("Consonants: {0}", x.Consonant_Amount());
+
         }
     }
 }
