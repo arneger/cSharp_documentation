@@ -79,8 +79,7 @@ namespace ConsoleApp7
             bool done = false;
             while (!done)
             {
-                string action = Console.ReadLine();
-                
+                string action = Console.ReadLine();            
                 switch (action)
                 {
                     case "1":
