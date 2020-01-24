@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
-namespace ConsoleApp6
+namespace ConsoleApp7
 {
     /* A simple console application that let you deposit, withdraw, calculate interest rate 
      and so on in the console. Doesn't save the data to a file, but I would probably use JSON for that. 
@@ -20,8 +20,16 @@ namespace ConsoleApp6
             balance = s;
             interestRate = r;
         }
+        // Method that increases the interest rate if the balance has reached onver 1 million
+        private void Balance_Exceed()
+        {
+            if (balance > 1000000)
+                interestRate = 0.02;
+            else
+                interestRate = 0.01;
+        }
         // Method for depositing money into the bank account
-        public void Deposit(double money)
+        private void Deposit(double money)
         {
             double tempBalance = balance;
             balance += money;
@@ -30,7 +38,7 @@ namespace ConsoleApp6
             Balance_Exceed();
         }
         // Method to withdraw money from the bank account
-        public void Withdrawal(double money)
+        private void Withdrawal(double money)
         {
             double tempBalance;
             if (balance < money)
@@ -45,12 +53,12 @@ namespace ConsoleApp6
             }
         }
         // Method that calculates the interest rate on the balance and returns the rate value.
-        public double interesCalculation()
+        private double interesCalculation()
         {
             return balance * interestRate;
         }
         // Method that adds the interest rate money value to the balance
-        public void Interest_Settlement()
+        private void Interest_Settlement()
         {
             double tempBalance = balance;
             balance += interesCalculation();
@@ -58,16 +66,8 @@ namespace ConsoleApp6
                 Console.WriteLine("Your interest rate increased by 1 percent");
             Balance_Exceed();
         }
-        // Method that increases the interest rate if the balance has reached onver 1 million
-        public void Balance_Exceed()
-        {
-            if (balance > 1000000)
-                interestRate = 0.02;
-            else
-                interestRate = 0.01;
-        }
         // Method that prints the menu
-        public void Show_Menu()
+        private void Show_Menu()
         {
             Console.WriteLine("TYPE VALUE AND ENTER TO NAVIGATE (For instance: 2+ENTER for Deposit)\n1 - Show balance\n2 - Deposit\n3 - Withdrawal\n4 - Interest-settlement\n5 - Recent balance-changes\nm - menu\nx - Exit program");
         }
@@ -76,57 +76,57 @@ namespace ConsoleApp6
         {
             Show_Menu();
             ArrayList lastChanges = new ArrayList(10);
-            while (true)
+            bool done = false;
+            while (!done)
             {
                 string action = Console.ReadLine();
-                if (action == "1")
-                    Console.WriteLine("Balance: {0}", Convert.ToString(balance));
-                else if (action == "2")
+                
+                switch (action)
                 {
-                    Console.Write("Amount: ");
-                    double amount = Convert.ToDouble(Console.ReadLine());
-                    lastChanges.Add("+" + Convert.ToString(amount));
-                    if (lastChanges.Count == 4)
-                        lastChanges.RemoveAt(0);
-                    Deposit(amount);
-                    Console.WriteLine("New balance: {0}", balance);
+                    case "1":
+                        Console.WriteLine("Balance: {0}", Convert.ToString(balance));
+                        break;
+                    case "2":
+                        Console.Write("Amount: ");
+                        double depositAmount = Convert.ToDouble(Console.ReadLine());
+                        lastChanges.Add("+" + Convert.ToString(depositAmount));
+                        if (lastChanges.Count == 4)
+                            lastChanges.RemoveAt(0);
+                        Deposit(depositAmount);
+                        Console.WriteLine("New balance: {0}", balance);
+                        break;
+                    case "3":
+                        Console.Write("Amount: ");
+                        double withdrawAmount = Convert.ToDouble(Console.ReadLine());
+                        lastChanges.Add("-" + Convert.ToString(withdrawAmount));
+                        if (lastChanges.Count == 4)
+                            lastChanges.RemoveAt(0);
+                        Withdrawal(withdrawAmount);
+                        Console.WriteLine("New balance: {0}", balance);
+                        break;
+                    case "4":
+                        lastChanges.Add("+" + Convert.ToString(balance * interestRate));
+                        if (lastChanges.Count == 4)
+                            lastChanges.RemoveAt(0);
+                        Interest_Settlement();
+                        Console.WriteLine("New balance: {0}", balance);
+                        break;
+                    case "5":
+                        foreach (string change in lastChanges)
+                        {
+                            Console.WriteLine(change);
+                        }
+                        break;
+                    case "m":
+                        Show_Menu();
+                        break;
+                    case "x":
+                        Console.WriteLine("Program has ended");
+                        done = true;
+                        break;
+                    default:
+                        break;
                 }
-                else if (action == "3")
-                {
-                    Console.Write("Amount: ");
-                    double amount = Convert.ToDouble(Console.ReadLine());
-                    lastChanges.Add("-" + Convert.ToString(amount));
-                    if (lastChanges.Count == 4)
-                        lastChanges.RemoveAt(0);
-                    Withdrawal(amount);
-                    Console.WriteLine("New balance: {0}", balance);
-                }
-                else if (action == "4")
-                {
-                    lastChanges.Add("+" + Convert.ToString(balance * interestRate));
-                    if (lastChanges.Count == 4)
-                        lastChanges.RemoveAt(0);
-                    Interest_Settlement();
-                    Console.WriteLine("New balance: {0}", balance);
-                }
-                else if (action == "5")
-                {
-                    foreach (string change in lastChanges)
-                    {
-                        Console.WriteLine(change);
-                    }
-                }
-                else if (action == "x")
-                {
-                    Console.WriteLine("Program has ended");
-                    break;
-                }
-                else if (action == "m")
-                    Show_Menu();
-                else
-                    continue;
-
-
             }
         }
 
