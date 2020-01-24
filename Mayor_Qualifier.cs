@@ -21,7 +21,7 @@ atleast 25 years old and lived in the city for atleast 5 years.
             theAge = Convert.ToInt32(a);
             theTime = Convert.ToInt32(t);
         }
-        public int Age_Value()
+        private int Age_Value()
         {
             int age = theAge;
             if (age >= 25 && age < 30)
@@ -33,7 +33,7 @@ atleast 25 years old and lived in the city for atleast 5 years.
             else
                 return 0;
         }
-        public int Citizen_Time()
+        private int Citizen_Time()
         {
             int time = theTime;
             if (time >= 5 && theTime < 10)
